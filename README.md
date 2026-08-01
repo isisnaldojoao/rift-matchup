@@ -20,6 +20,35 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## AI Integration
+
+The app already includes an API route at `src/app/api/analyze-match/route.ts` that can use OpenAI to power matchup analysis.
+
+To enable AI integration with Grok via the Groq-compatible endpoint:
+1. Create a `.env.local` file in the project root.
+2. Add your Groq key, or reuse an existing OpenAI key. Do not need quotes around the value:
+
+```env
+GROQ_API_KEY=sk-...
+# or
+OPENAI_API_KEY=sk-...
+```
+
+3. Set the model to Grok:
+
+```env
+GROQ_MODEL=grok-1
+```
+
+4. Run the development server with:
+
+```bash
+npm run dev
+```
+
+The API will now ask the model to return exact JSON keys: `ta pedindo`, `dificuldade`, `win rate`, `setup`, `toda a build`, `games` e `dicas`.
+
+If neither `GROQ_API_KEY` nor `OPENAI_API_KEY` is configured, or if the request fails, the app falls back to the static matchup generator in `src/app/data/championsData.ts`.
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
