@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050508;
+  --foreground: #f4f4f5;
+  --card-bg: #0c0d12;
+  --card-border: #1d2130;
+  --lol-gold: #c8aa6e;
+  --lol-gold-dark: #785a28;
+  --lol-gold-light: #f0e6d2;
+  --lol-blue: #00d2ff;
+  --lol-blue-dark: #005a82;
+  --lol-purple: #a855f7;
+  --lol-dark-blue: #090916;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card-bg);
+  --color-gold: var(--lol-gold);
+  --color-gold-dark: var(--lol-gold-dark);
+  --color-gold-light: var(--lol-gold-light);
+  --color-cyan-glow: var(--lol-blue);
+  --color-blue-dark: var(--lol-blue-dark);
+  --color-purple-glow: var(--lol-purple);
+  --font-sans: var(--font-geist-sans), Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2235;
+  border-radius: 4px;
+  border: 1px solid var(--lol-gold-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lol-gold-dark);
+}
+
+/* Custom Gaming Borders & Shadows */
+.gold-border {
+  border: 1px solid var(--lol-gold-dark);
+  background: linear-gradient(to bottom, #11131c, #07080d);
+  transition: all 0.3s ease;
+}
+
+.gold-border:hover {
+  border-color: var(--lol-gold);
+  box-shadow: 0 0 15px rgba(200, 170, 110, 0.25);
+}
+
+.blue-glow {
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.blue-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+  border-color: var(--lol-blue);
+}
+
+.hextech-gradient {
+  background: linear-gradient(135deg, var(--lol-blue-dark) 0%, #050508 100%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(180deg, var(--lol-gold-light) 0%, var(--lol-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blue-gradient-text {
+  background: linear-gradient(180deg, #ffffff 0%, var(--lol-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card glassmorphism */
+.glass-panel {
+  background: rgba(12, 13, 18, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(18, 20, 28, 0.85);
+  border-color: rgba(0, 210, 255, 0.2);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animations */
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px var(--lol-blue));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--lol-blue));
+  }
+}
+
+.animate-neon {
+  animation: neonPulse 3s infinite ease-in-out;
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    border-color: var(--lol-gold-dark);
+  }
+  50% {
+    border-color: var(--lol-gold);
+  }
+}
+
+.animate-gold-border {
+  animation: goldPulse 4s infinite ease-in-out;
 }
